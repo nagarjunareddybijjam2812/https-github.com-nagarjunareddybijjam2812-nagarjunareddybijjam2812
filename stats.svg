@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 200" width="450" height="200">
+  <defs>
+    <!-- Card Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0314" />
+      <stop offset="50%" stop-color="#180a2b" />
+      <stop offset="100%" stop-color="#0b0314" />
+    </linearGradient>
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f472b6" />
+      <stop offset="100%" stop-color="#a78bfa" />
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glow-subtle" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    /* Card Container Hover & Animation */
+    @keyframes pulseGlow {
+      0% { filter: drop-shadow(0 0 4px rgba(236, 72, 153, 0.3)); }
+      50% { filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.6)); }
+      100% { filter: drop-shadow(0 0 4px rgba(236, 72, 153, 0.3)); }
+    }
+    .card-bg {
+      animation: pulseGlow 6s infinite ease-in-out;
+    }
+
+    /* Rank Ring Animation */
+    @keyframes drawRing {
+      0% { stroke-dashoffset: 283; }
+      100% { stroke-dashoffset: 45; } /* 84% complete */
+    }
+    @keyframes rotateRing {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .rank-ring-progress {
+      stroke-dasharray: 283;
+      stroke-dashoffset: 283;
+      animation: drawRing 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      transform-origin: 65px 100px;
+    }
+    .rank-text {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      font-weight: 800;
+      fill: #fff;
+      font-size: 26px;
+      text-shadow: 0 0 8px rgba(236, 72, 153, 0.8);
+      opacity: 0;
+      animation: fadeIn 1s 1.2s forwards;
+    }
+
+    /* Stats Entry Animations */
+    @keyframes slideIn {
+      0% { transform: translateX(30px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes growBar {
+      0% { width: 0px; }
+      100% { width: var(--final-width); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .stat-row {
+      opacity: 0;
+      animation: slideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .stat-row-1 { animation-delay: 0.2s; }
+    .stat-row-2 { animation-delay: 0.4s; }
+    .stat-row-3 { animation-delay: 0.6s; }
+    .stat-row-4 { animation-delay: 0.8s; }
+
+    .stat-bar {
+      height: 10px;
+      rx: 5px;
+      animation: growBar 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .bar-commits { --final-width: 225px; animation-delay: 0.5s; }
+    .bar-prs { --final-width: 155px; animation-delay: 0.7s; }
+    .bar-issues { --final-width: 77px; animation-delay: 0.9s; }
+    .bar-stars { --final-width: 190px; animation-delay: 1.1s; }
+
+    /* General Typography */
+    .title-text {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      font-weight: 700;
+      fill: #f472b6;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+    .label-text {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 13px;
+      fill: #c084fc;
+      font-weight: 500;
+    }
+    .val-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      fill: #ffffff;
+      font-weight: 700;
+      text-anchor: end;
+    }
+    .rank-sub {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 10px;
+      fill: #94a3b8;
+      font-weight: 500;
+      text-anchor: middle;
+      opacity: 0;
+      animation: fadeIn 0.8s 1.4s forwards;
+    }
+  </style>
+
+  <!-- Background Card -->
+  <rect class="card-bg" x="3" y="3" width="444" height="194" rx="16" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="1.5" />
+
+  <!-- Title -->
+  <text class="title-text" x="25" y="35">GitHub Stats &amp; Rank</text>
+
+  <!-- Rank Section on the Left -->
+  <g transform="translate(0, 0)">
+    <!-- Outer Glow Circle -->
+    <circle cx="65" cy="110" r="45" fill="none" stroke="#2e1065" stroke-width="6" opacity="0.4" />
+    
+    <!-- Animated Progress Ring -->
+    <circle class="rank-ring-progress" cx="65" cy="110" r="45" fill="none" stroke="url(#ringGrad)" stroke-width="6" 
+            stroke-linecap="round" transform="rotate(-90 65 110)" filter="url(#glow-subtle)" />
+    
+    <!-- Rank Text -->
+    <text class="rank-text" x="65" y="118" text-anchor="middle">S+</text>
+    <text class="rank-sub" x="65" y="170">TOP 1.2%</text>
+  </g>
+
+  <!-- Stats List on the Right -->
+  <g transform="translate(150, 55)">
+    <!-- Commits -->
+    <g class="stat-row stat-row-1" transform="translate(0, 0)">
+      <text class="label-text" x="0" y="10">Total Commits</text>
+      <text class="val-text" x="275" y="10">1,542</text>
+      <rect x="0" y="18" width="275" height="10" fill="#1e1136" rx="5" />
+      <rect class="stat-bar bar-commits" x="0" y="18" width="0" height="10" fill="url(#barGrad)" />
+    </g>
+
+    <!-- Pull Requests -->
+    <g class="stat-row stat-row-2" transform="translate(0, 35)">
+      <text class="label-text" x="0" y="10">Pull Requests</text>
+      <text class="val-text" x="275" y="10">94</text>
+      <rect x="0" y="18" width="275" height="10" fill="#1e1136" rx="5" />
+      <rect class="stat-bar bar-prs" x="0" y="18" width="0" height="10" fill="url(#barGrad)" />
+    </g>
+
+    <!-- Issues -->
+    <g class="stat-row stat-row-3" transform="translate(0, 70)">
+      <text class="label-text" x="0" y="10">Issues Resolved</text>
+      <text class="val-text" x="275" y="10">48</text>
+      <rect x="0" y="18" width="275" height="10" fill="#1e1136" rx="5" />
+      <rect class="stat-bar bar-issues" x="0" y="18" width="0" height="10" fill="url(#barGrad)" />
+    </g>
+
+    <!-- Stars -->
+    <g class="stat-row stat-row-4" transform="translate(0, 105)">
+      <text class="label-text" x="0" y="10">Stars Earned</text>
+      <text class="val-text" x="275" y="10">168</text>
+      <rect x="0" y="18" width="275" height="10" fill="#1e1136" rx="5" />
+      <rect class="stat-bar bar-stars" x="0" y="18" width="0" height="10" fill="url(#barGrad)" />
+    </g>
+  </g>
+</svg>

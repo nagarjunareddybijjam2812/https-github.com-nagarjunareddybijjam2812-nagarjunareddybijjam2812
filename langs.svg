@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 200" width="450" height="200">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0314" />
+      <stop offset="50%" stop-color="#180a2b" />
+      <stop offset="100%" stop-color="#0b0314" />
+    </linearGradient>
+    <!-- Border Gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ec4899" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#ec4899" />
+    </linearGradient>
+
+    <!-- Language Specific Gradients -->
+    <linearGradient id="pyGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#60a5fa" />
+    </linearGradient>
+    <linearGradient id="sqlGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+    <linearGradient id="mlGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#db2777" />
+      <stop offset="100%" stop-color="#f472b6" />
+    </linearGradient>
+    <linearGradient id="genAiGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#c084fc" />
+    </linearGradient>
+
+    <filter id="glow" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes pulseCard {
+      0% { filter: drop-shadow(0 0 4px rgba(236, 72, 153, 0.3)); }
+      50% { filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.6)); }
+      100% { filter: drop-shadow(0 0 4px rgba(236, 72, 153, 0.3)); }
+    }
+    .card-bg {
+      animation: pulseCard 6s infinite ease-in-out;
+    }
+
+    /* Staggered Row Entries */
+    @keyframes slideRight {
+      0% { transform: translateX(-20px); opacity: 0; }
+      100% { transform: translateX(0); opacity: 1; }
+    }
+    .lang-row {
+      opacity: 0;
+      animation: slideRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .row-1 { animation-delay: 0.2s; }
+    .row-2 { animation-delay: 0.4s; }
+    .row-3 { animation-delay: 0.6s; }
+    .row-4 { animation-delay: 0.8s; }
+
+    /* Bar Grow Animations */
+    @keyframes growBar {
+      0% { width: 0%; }
+      100% { width: var(--bar-pct); }
+    }
+    .bar {
+      height: 10px;
+      rx: 5px;
+      animation: growBar 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .bar-py { --bar-pct: 45%; animation-delay: 0.4s; }
+    .bar-gen { --bar-pct: 30%; animation-delay: 0.6s; }
+    .bar-ml { --bar-pct: 15%; animation-delay: 0.8s; }
+    .bar-sql { --bar-pct: 10%; animation-delay: 1.0s; }
+
+    /* Typography */
+    .title-text {
+      font-family: 'Space Grotesk', -apple-system, sans-serif;
+      font-weight: 700;
+      fill: #f472b6;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+    .name-text {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 13px;
+      fill: #e2e8f0;
+      font-weight: 600;
+    }
+    .pct-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      fill: #a78bfa;
+      font-weight: 700;
+      text-anchor: end;
+    }
+  </style>
+
+  <!-- Background Card -->
+  <rect class="card-bg" x="3" y="3" width="444" height="194" rx="16" fill="url(#bgGrad)" stroke="url(#borderGrad)" stroke-width="1.5" />
+
+  <!-- Title -->
+  <text class="title-text" x="25" y="35">Most Used Technologies &amp; Languages</text>
+
+  <!-- Language Grid -->
+  <g transform="translate(25, 55)">
+    <!-- Python (45%) -->
+    <g class="lang-row row-1" transform="translate(0, 0)">
+      <text class="name-text" x="0" y="10">Python</text>
+      <text class="pct-text" x="400" y="10">45%</text>
+      <rect x="0" y="18" width="400" height="10" fill="#1e1136" rx="5" />
+      <rect class="bar bar-py" x="0" y="18" width="0" height="10" fill="url(#pyGrad)" filter="url(#glow)" />
+    </g>
+
+    <!-- Generative AI & LLMs (30%) -->
+    <g class="lang-row row-2" transform="translate(0, 35)">
+      <text class="name-text" x="0" y="10">Generative AI &amp; LLMs</text>
+      <text class="pct-text" x="400" y="10">30%</text>
+      <rect x="0" y="18" width="400" height="10" fill="#1e1136" rx="5" />
+      <rect class="bar bar-gen" x="0" y="18" width="0" height="10" fill="url(#genAiGrad)" />
+    </g>
+
+    <!-- Machine Learning & Deep Learning (15%) -->
+    <g class="lang-row row-3" transform="translate(0, 70)">
+      <text class="name-text" x="0" y="10">ML &amp; Deep Learning</text>
+      <text class="pct-text" x="400" y="10">15%</text>
+      <rect x="0" y="18" width="400" height="10" fill="#1e1136" rx="5" />
+      <rect class="bar bar-ml" x="0" y="18" width="0" height="10" fill="url(#mlGrad)" />
+    </g>
+
+    <!-- SQL (10%) -->
+    <g class="lang-row row-4" transform="translate(0, 105)">
+      <text class="name-text" x="0" y="10">SQL Database</text>
+      <text class="pct-text" x="400" y="10">10%</text>
+      <rect x="0" y="18" width="400" height="10" fill="#1e1136" rx="5" />
+      <rect class="bar bar-sql" x="0" y="18" width="0" height="10" fill="url(#sqlGrad)" />
+    </g>
+  </g>
+</svg>

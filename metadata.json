@@ -1,0 +1,6 @@
+{
+  "name": "Animated GitHub Profile Generator",
+  "description": "An interactive generator and customizer for an animated GitHub profile README featuring SVG banners, swinging lanyards, local stats, and automatic background-removal tools.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
